@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Англійський пазл</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/style-min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <a href="https://send.monobank.ua/jar/5hBq1Corw6" class="support-button">Підтримати проект</a>
+    <div class="grid">
+      <div class="grid-item" data-topic="Мої слова"><i class="fa fa-book"></i> Мої слова</div>
+      <div class="grid-item" data-topic="Технології"><i class="fa fa-laptop"></i> Технології</div>
+      <div class="grid-item" data-topic="Мистецтво"><i class="fa fa-paint-brush"></i> Мистецтво</div>
+      <div class="grid-item" data-topic="Музика"><i class="fa fa-music"></i> Музика</div>
+      <div class="grid-item" data-topic="Кіно"><i class="fa fa-film"></i> Кіно</div>
+      <div class="grid-item" data-topic="Наука"><i class="fa fa-flask"></i> Наука</div>
+      <div class="grid-item" data-topic="Література"><i class="fa fa-book"></i> Література</div>
+      <div class="grid-item" data-topic="Історія"><i class="fa fa-university"></i> Історія</div>
+      <div class="grid-item" data-topic="Подорожі"><i class="fa fa-plane"></i> Подорожі</div>
+      <div class="grid-item" data-topic="Кулінарія"><i class="fas fa-utensils"></i> Кулінарія</div>
+      <div class="grid-item" data-topic="Мода"><i class="fa fa-shopping-bag"></i> Мода</div>
+      <div class="grid-item" data-topic="Спорт"><i class="fas fa-futbol"></i> Спорт</div>
+      <div class="grid-item" data-topic="Здоров'я"><i class="fa fa-heartbeat"></i> Здоров'я</div>
+      <div class="grid-item" data-topic="Екологія"><i class="fa fa-leaf"></i> Екологія</div>
+      <div class="grid-item" data-topic="Автомобілі"><i class="fa fa-car"></i> Автомобілі</div>
+      <div class="grid-item" data-topic="Бізнес"><i class="fa fa-briefcase"></i> Бізнес</div>
+      <div class="grid-item" data-topic="Наукова фантастика"><i class="fa fa-rocket"></i> Наукова фантастика</div>
+      <div class="grid-item" data-topic="Психологія"><i class="fa fa-user-md"></i> Психологія</div>
+      <div class="grid-item" data-topic="Астрономія"><i class="fa fa-star"></i> Астрономія</div>
+      <div class="grid-item" data-topic="Філософія"><i class="fa fa-cloud"></i> Філософія</div>
+      <div class="grid-item" data-topic="Домашні тварини"><i class="fa fa-paw"></i> Домашні тварини</div>
+    </div>
+  </div>
+  <div class="knowledge-test-block">
+    <i style="font-size: 24px" class="fas fa-book-reader knowledge-test-icon"></i>
+    <h2 class="knowledge-test-title">Тест на знання</h2>
+    <p class="knowledge-test-description">У наступному оновленні ви зможете проходити тести та оцінювати свої знання.
+    </p>
+  </div>
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close-button">&times;</span>
+      <h2 id="topic-title"></h2>
+      <p class="amount-number"></p>
+      <p class="additional-label"></p>
+      <div id="add-word-form" style="display: none;">
+        <input type="text" id="new-word" placeholder="Англійське слово">
+        <input type="text" id="new-translation" placeholder="Переклад">
+        <button id="add-word-btn">Додати</button>
+      </div>
+      <div class="empty-vocabulary" style="display: none;">
+        <p>Ваш словник не містить жодного слова! </p>
+        <img src="./img/empty-vocabulary.png" alt="">
+      </div>
+      <div id="words-list"></div>
+
+      <div id="mini-popup" class="mini-popup">
+        <span class="close-mini-popup">&times;</span>
+        <div class="mini-popup-content">
+          <h2 id="word-to-delete">Удалить слово: <span>"слово"</span>?</h2>
+          <button id="delete-word-confirm" class="delete-button">Видалити <i class="fas fa-trash-alt"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="https://t.me/sunset_man" target="_blank" class="support-btn">
+    <i class="fab fa-telegram-plane"></i> Написати в підтримку
+  </a>
+
+  <script src="./assets/data-min.js"></script>
+  <script src="main-min.js"></script>
+</body>
+
+</html>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+</style>

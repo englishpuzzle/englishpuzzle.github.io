@@ -1,0 +1,518 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px 0 40px;
+}
+
+.additional-label {
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30px;
+  width: fit-content;
+  max-width: 300px;
+  text-align: center;
+  font-size: 14px;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.amount-number {
+  font-size: 14px;
+}
+
+.empty-vocabulary {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 70%;
+  border: 1px solid #0000007a;
+  padding: 10px;
+  border-radius: 20px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.empty-vocabulary img {
+  width: 45%;
+  opacity: 0.4;
+}
+
+.empty-vocabulary p {
+  text-align: center;
+  width: 49%;
+  font-size: 22px;
+  opacity: .4;
+}
+
+@media only screen and (max-width: 768px) {
+  .empty-vocabulary {
+    width: 100%;
+  }
+
+  .empty-vocabulary p {
+    width: 40%;
+    font-size: 20px;
+  }
+}
+
+.mini-popup {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transform: translate(100%, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+.mini-popup.active {
+  transform: translate(0, 0);
+}
+
+.mini-popup-content {
+  position: relative;
+  text-align: center;
+}
+
+.close-mini-popup {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 50px;
+  color: #666;
+  transition: color 0.3s ease;
+  margin-right: 8px;
+}
+
+.close-mini-popup:hover {
+  color: #000;
+}
+
+.delete-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #ff7875;
+}
+
+.knowledge-test-block {
+  width: 90%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.knowledge-test-title {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.knowledge-test-description {
+  color: #666;
+  font-size: 14px;
+}
+
+
+.support-btn {
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  padding: 10px;
+  background-color: #0088cc;
+  /* Цвет фона кнопки */
+  color: white;
+  /* Цвет текста */
+  text-decoration: none;
+  border-radius: 25px;
+  /* Закругленные края */
+  font-size: 16px;
+  /* Размер шрифта */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  /* Тень для кнопки */
+  margin: 0 auto;
+  /* Центрирование кнопки */
+  transition: background-color 0.3s ease;
+  /* Плавное изменение цвета при наведении */
+  left: 50%;
+  transform: translate(-50%, 0);
+  position: fixed;
+  bottom: 20px;
+  max-width: 270px;
+}
+
+@media only screen and (max-width: 768px) {
+  .support-btn {
+    font-size: 12px;
+  }
+}
+
+.support-btn i {
+  margin-right: 8px;
+  /* Отступ иконки от текста */
+}
+
+.support-btn:hover {
+  background-color: #0077b5;
+  /* Цвет фона кнопки при наведении */
+}
+
+
+#add-word-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#add-word-form input[type="text"],
+#add-word-form button {
+  flex-grow: 1;
+  flex-basis: calc(50% - 10px);
+  /* Adjust based on your actual gap and padding */
+  padding: 10px;
+  font-size: 1rem;
+}
+
+#add-word-form button {
+  flex-basis: 100%;
+  /* Button takes full width on all screens */
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#add-word-form input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#add-word-form button:hover {
+  background-color: #333;
+}
+
+@media (max-width: 600px) {
+
+  #add-word-form input[type="text"],
+  #add-word-form button {
+    flex-basis: 100%;
+    /* Each item takes full width on small screens */
+  }
+}
+
+.validation-message {
+  min-height: 20px;
+  color: rgb(0, 0, 0);
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0;
+  /* Изначально сообщение полностью прозрачное */
+  transition: opacity 0.5s ease-in-out;
+  /* Плавное изменение прозрачности */
+}
+
+.validation-message.show {
+  opacity: 1;
+  /* Полная видимость для анимации появления */
+}
+
+.validation-message.hide {
+  opacity: 0;
+  /* Возвращаем к полной прозрачности для анимации исчезновения */
+}
+
+body,
+html {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.support-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #000;
+  /* Черный цвет кнопки */
+  color: #ffffff;
+  text-align: center;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 calc(33.333% - 10px);
+  background-color: #e7e7e7;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .grid-item {
+    flex: 0 0 calc(50% - 10px);
+  }
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  animation: fadeIn 0.5s;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 15px;
+  padding-bottom: 110px;
+  border-radius: 5px;
+  width: 95%;
+  max-width: 600px;
+  animation: fadeIn 0.5s;
+  position: absolute;
+  overflow: hidden;
+  max-height: 95%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 600px) {
+
+  .container,
+  .popup-content {
+    margin: 10px auto;
+  }
+}
+
+.grid-item i,
+.close-button {
+  margin-right: 8px;
+  font-size: 20px;
+  /* Увеличение размера иконок */
+}
+
+.close-button {
+  float: right;
+  cursor: pointer;
+  font-size: 50px;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.word-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3px;
+}
+
+.word-item span:first-child {
+  max-width: 100px;
+  font-size: 14px;
+  word-break: break-all;
+  text-align: left;
+  cursor: pointer;
+}
+
+
+.word-item span:nth-child(2) {
+  font-size: 14px;
+  word-break: break-all;
+  max-width: 100px;
+  text-align: left;
+}
+
+.toggle-translation {
+  margin-left: 10px;
+  font-size: 0.8em;
+  /* Немного меньше, чтобы соответствовать контексту */
+  margin: 5px 0;
+  /* Добавляем отступы между кнопками */
+  font-size: 0.7rem;
+  /* Уменьшаем шрифт */
+  padding: 5px;
+  /* Уменьшаем размер кнопок */
+}
+
+.button:hover {
+  background-color: #000;
+  /* Черная заливка при наведении */
+  color: #fff;
+  /* Белый текст при наведении */
+}
+
+/* Эффект размытия для перевода */
+.blur {
+  filter: blur(5px);
+}
+
+.show-all-translations-btn {
+  display: block;
+  margin-left: auto;
+  /* Выравнивание справа */
+  margin-right: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.button {
+  border: 2px solid #000;
+  /* Черные границы */
+  background-color: transparent;
+  /* Без заливки */
+  color: #000;
+  /* Черный текст */
+  padding: 5px 10px;
+  /* Меньше паддинг */
+  font-size: 0.8rem;
+  /* Меньше по размеру */
+  cursor: pointer;
+  border-radius: 5px;
+  /* Скругление углов */
+  transition: background-color 0.3s ease;
+}
+
+.grid-item:hover,
+.support-button:hover,
+.close-button:hover {
+  opacity: 0.8;
+  /* Ховер эффект */
+}
+
+h2 {
+  color: #333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 20px;
+}
+
+.pagination a {
+  margin: 0 5px;
+  text-decoration: none;
+  color: white;
+  border: 1px solid #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  /* Скругление углов */
+  transition: background-color 0.3s ease;
+  background: black;
+}
+
+.pagination a:first-child,
+.pagination a:last-child {
+  padding: 5px 15px;
+  background: white;
+  color: black;
+}
+
+.wrapper-global-button {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+
+.pagination a.disabled {
+  pointer-events: none;
+  background: white;
+  color: black;
+  opacity: .3;
+  display: none;
+}
+
+.pagination a:first-child.disabled,
+.pagination a:last-child.disabled {
+  display: block;
+}
+
+.buttons-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+[data-topic="Мої слова"] {
+  background: #2196F3;
+  color: white;
+}
