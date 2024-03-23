@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Англійський пазл</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/style-min.css">
+  <link rel="stylesheet" href="./assets/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-51CPY8GWYC"></script>
@@ -15,15 +15,31 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
   
-    gtag('config', 'G-51CPY8GWYC');
+    gtag('config', 'G-51CPY8GWYC'); 
   </script>
 </head>
 
 <body>
+  <div class="main-navigation">
+    <div class="navigation-wrapper">
+      <!-- <button class="add-word-btn"><i class="fas fa-plus"></i> Додати слово</button> -->
+      <button  class="grid-item my-dictionary-btn" data-topic="Мої слова"> Мій словник</button>
+      <button class="all-themes-button"> База слів</button>
+    
+      <a class="navigation-item unavailable" href="#"><span>Перевір знання</span><i class="fas fa-arrow-right"></i></a>
+      <a class="navigation-item unavailable" href="#"><span>Мій прогрес</span><i class="fas fa-arrow-right"></i></a>
+      <a class="navigation-item" href="https://send.monobank.ua/jar/5hBq1Corw6"><span>Підтримка проєкту</span><i class="fas fa-arrow-right"></i></a>
+      <a class="navigation-item" href="https://t.me/+TcmuQxEsQhwwMjQy"><span>Підписатись на канал</span><i class="fas fa-arrow-right"></i></a>
+      <a class="navigation-item" href="https://t.me/sunset_man"><span>Виникли питання</span><i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+
+
   <div class="container">
-    <a href="https://send.monobank.ua/jar/5hBq1Corw6" class="support-button">Підтримати проект</a>
+    <!-- <a href="https://send.monobank.ua/jar/5hBq1Corw6" class="support-button">Підтримати проект</a> -->
+    <h2 id="title-container">База слів</h2>
+    <span class="close-button-container">×</span>
     <div class="grid">
-      <div class="grid-item" data-topic="Мої слова"><i class="fa fa-book"></i> Мої слова</div>
       <div class="grid-item" data-topic="Технології"><i class="fa fa-laptop"></i> Технології</div>
       <div class="grid-item" data-topic="Мистецтво"><i class="fa fa-paint-brush"></i> Мистецтво</div>
       <div class="grid-item" data-topic="Музика"><i class="fa fa-music"></i> Музика</div>
@@ -46,12 +62,7 @@
       <div class="grid-item" data-topic="Домашні тварини"><i class="fa fa-paw"></i> Домашні тварини</div>
     </div>
   </div>
-  <div class="knowledge-test-block">
-    <i style="font-size: 24px" class="fas fa-book-reader knowledge-test-icon"></i>
-    <h2 class="knowledge-test-title">Тест на знання</h2>
-    <p class="knowledge-test-description">У наступному оновленні ви зможете проходити тести та оцінювати свої знання.
-    </p>
-  </div>
+
   <div id="popup" class="popup">
     <div class="popup-content">
       <span class="close-button">&times;</span>
@@ -78,18 +89,9 @@
       </div>
     </div>
   </div>
-  <a href="https://t.me/sunset_man" target="_blank" class="support-btn">
-    <i class="fab fa-telegram-plane"></i> Написати в підтримку
-  </a>
 
   <script src="./assets/data-min.js"></script>
-  <script src="./assets/main-min.js"></script>
+  <script src="./assets/main.js"></script>
 </body>
 
 </html>
-
-<style>
-  * {
-    box-sizing: border-box;
-  }
-</style>
