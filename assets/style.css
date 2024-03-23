@@ -3,7 +3,7 @@
 }
 
 body {
-  padding: 20px 0 40px;
+  padding: 60px 0 40px;
 }
 
 .additional-label {
@@ -69,7 +69,7 @@ body {
   width: 100%;
   height: 100%;
   align-items: center;
-  background-color: #fff;
+  background: linear-gradient(90deg, rgba(139, 198, 236, 1), rgb(88 156 199));
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -117,74 +117,6 @@ body {
   background-color: #ff7875;
 }
 
-.knowledge-test-block {
-  width: 90%;
-  background-color: white;
-  padding: 10px;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 20px auto;
-  text-align: center;
-}
-
-.knowledge-test-title {
-  color: #333;
-  margin-bottom: 10px;
-  font-size: 20px;
-}
-
-.knowledge-test-description {
-  color: #666;
-  font-size: 14px;
-}
-
-
-.support-btn {
-  text-align: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  padding: 10px;
-  background-color: #0088cc;
-  /* Цвет фона кнопки */
-  color: white;
-  /* Цвет текста */
-  text-decoration: none;
-  border-radius: 25px;
-  /* Закругленные края */
-  font-size: 16px;
-  /* Размер шрифта */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  /* Тень для кнопки */
-  margin: 0 auto;
-  /* Центрирование кнопки */
-  transition: background-color 0.3s ease;
-  /* Плавное изменение цвета при наведении */
-  left: 50%;
-  transform: translate(-50%, 0);
-  position: fixed;
-  bottom: 20px;
-  max-width: 270px;
-}
-
-@media only screen and (max-width: 768px) {
-  .support-btn {
-    font-size: 12px;
-  }
-}
-
-.support-btn i {
-  margin-right: 8px;
-  /* Отступ иконки от текста */
-}
-
-.support-btn:hover {
-  background-color: #0077b5;
-  /* Цвет фона кнопки при наведении */
-}
-
 
 #add-word-form {
   display: flex;
@@ -204,21 +136,18 @@ body {
 #add-word-form button {
   flex-basis: 100%;
   /* Button takes full width on all screens */
-  background-color: #000;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #add-word-form input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-#add-word-form button:hover {
-  background-color: #333;
 }
 
 @media (max-width: 600px) {
@@ -255,22 +184,31 @@ body,
 html {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
-  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+  background: rgb(139,198,236);
+  background: linear-gradient(90deg, rgba(139,198,236,1), rgba(139,198,236,1));
   min-height: 100vh;
 }
 
 .container {
-  display: flex;
-  justify-content: center;
+  display: none;
   align-items: center;
   flex-direction: column;
   width: 90%;
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
+  padding: 20px 20px 30px;
   background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, rgba(139,198,236,1), rgba(139,198,236,1));
+}
+
+.container h2 {
+  margin-bottom: 40px;
+}
+
+.container.active {
+  display: block;
 }
 
 .support-button {
@@ -299,18 +237,15 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0 0 calc(33.333% - 10px);
-  background-color: #e7e7e7;
+  background-color: #ffffff;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
-}
-
-@media (max-width: 600px) {
-  .grid-item {
-    flex: 0 0 calc(50% - 10px);
-  }
+  width: 100%;
+  position: relative;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .popup {
@@ -326,42 +261,38 @@ html {
 }
 
 .popup-content {
-  background-color: #fff;
+  background: linear-gradient(90deg, rgba(139,198,236,1), rgba(139,198,236,1));
   padding: 15px;
   padding-bottom: 110px;
-  border-radius: 5px;
-  width: 95%;
-  max-width: 600px;
+  width: 100%;
+  height: 100%;
   animation: fadeIn 0.5s;
   position: absolute;
   overflow: hidden;
-  max-height: 95%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 }
 
-@media (max-width: 600px) {
-
-  .container,
-  .popup-content {
-    margin: 10px auto;
-  }
-}
-
-.grid-item i,
-.close-button {
+.close-button, .close-button-container {
   margin-right: 8px;
   font-size: 20px;
   /* Увеличение размера иконок */
 }
 
-.close-button {
+.grid-item i {
+  margin-right: 8px;
+  font-size: 20px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 24px;
+}
+
+.close-button, .close-button-container {
   float: right;
   cursor: pointer;
   font-size: 50px;
   position: absolute;
-  top: 10px;
+  top: 23px;
   right: 15px;
 }
 
@@ -369,7 +300,7 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 3px;
+  padding-bottom: 8px;
 }
 
 .word-item span:first-child {
@@ -448,7 +379,7 @@ html {
 
 .grid-item:hover,
 .support-button:hover,
-.close-button:hover {
+.close-button, .close-button-container:hover {
   opacity: 0.8;
   /* Ховер эффект */
 }
@@ -475,13 +406,12 @@ h2 {
   border-radius: 5px;
   /* Скругление углов */
   transition: background-color 0.3s ease;
-  background: black;
+  color: black;
 }
 
 .pagination a:first-child,
 .pagination a:last-child {
   padding: 5px 15px;
-  background: white;
   color: black;
 }
 
@@ -489,6 +419,7 @@ h2 {
   display: flex;
   justify-content: right;
   align-items: center;
+  margin-bottom: 6px;
 }
 
 
@@ -515,4 +446,95 @@ h2 {
 [data-topic="Мої слова"] {
   background: #2196F3;
   color: white;
+}
+
+.add-word-btn {
+  background: transparent;
+  color: #000;
+  padding: 10px 20px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Get the button on the same line */
+  font-size: 16px; /* Increase font size */
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 8px; /* Rounded corners */
+  margin-bottom: 20px;
+  max-width: 170px;
+  border: 1px solid black;
+}
+
+.add-word-btn:hover {
+}
+
+.add-word-btn .fas {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.my-dictionary-btn,
+.all-themes-button {
+  background-color: white; /* White background */
+  color: #000000; /* Blue text */
+  padding: 14px 10px; /* Some padding */
+  text-align: center; /* Centered text */
+  text-decoration: none; /* No underline */
+  display: inline-block; /* Get the button on the same line */
+  font-size: 24px; /* Increase font size */
+  cursor: pointer; /* Pointer/hand icon */
+  border-radius: 14px; /* Large rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-bottom: 20px;
+  font-family: 'Montserrat';
+  border: none;
+}
+
+.my-dictionary-btn:hover {
+  background-color: #f0f8ff; /* Light blue background on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly larger shadow on hover */
+}
+
+.my-dictionary-btn .fas {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.navigation-wrapper {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+.main-navigation {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.navigation-item {
+  display: flex;
+  gap: 10px;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 24px;
+  font-size: 24px;
+  position: relative;
+
+}
+
+.navigation-item.unavailable:after {
+  position: absolute;
+  content: "( В розробці )";
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  font-size: 12px;
+}
+
+.navigation-item.unavailable {
+  opacity: .6;
+}
+
+.navigation-item:last-child {
+  margin-bottom: 0;
 }
