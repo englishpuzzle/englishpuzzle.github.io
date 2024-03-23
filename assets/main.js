@@ -13,9 +13,25 @@ document.addEventListener('DOMContentLoaded', function () {
   const validationMessageContainer = document.createElement('div');
   validationMessageContainer.className = 'validation-message';
   document.getElementById('add-word-form').appendChild(validationMessageContainer);
+  const allThemesButton = document.querySelector('.all-themes-button');
+  const closeButton = document.querySelector('.close-button-container');
+
+  allThemesButton.addEventListener('click', toogleVisibilityContainer);
+  closeButton.addEventListener('click', toogleVisibilityContainer);
 
 
-  // Данные
+  function toogleVisibilityContainer () {
+    let allthemesBlock = document.querySelector('.container');
+    let visibility = allthemesBlock.classList.contains('active');
+
+    if (visibility) {
+      allthemesBlock.classList.remove('active');
+    } else {
+      allthemesBlock.classList.add('active');
+    }
+  }
+
+  
 
 
   function showValidationMessage(message, duration = 5000) {
@@ -173,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function displayWordsForTopic(topic, page = 1) {
-    const itemsPerPage = 6; // Количество слов на странице
+    const itemsPerPage = 7; // Количество слов на странице
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const topicWords = topics[topic].slice(startIndex, endIndex); // Получаем слова для текущей страницы
