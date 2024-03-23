@@ -122,6 +122,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  display: none !important;
 }
 
 #add-word-form input[type="text"],
