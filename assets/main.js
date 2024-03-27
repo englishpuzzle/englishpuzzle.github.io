@@ -15,9 +15,22 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('add-word-form').appendChild(validationMessageContainer);
   const allThemesButton = document.querySelector('.all-themes-button');
   const closeButton = document.querySelector('.close-button-container');
+  let closeBtnForm2 = document.querySelector('.close-button-form-2');
+  let popUpNewWord = document.querySelector('.popup-add-new-word');
+  let checkKnowledgeButton = document.querySelector('.check-knowledge');
+  const quizPopup = document.getElementById('quiz-popup');
+  const quizContent = document.getElementById('quiz-content');
+  const startQuizBtn = document.getElementById('start-quiz-btn');
+  let wrapperKnowledge = document.querySelector('.wrapper-check-knowledge');
+  let closeBtnform3 = document.querySelector('.close-button-form-3');
+
 
   allThemesButton.addEventListener('click', toogleVisibilityContainer);
   closeButton.addEventListener('click', toogleVisibilityContainer);
+
+  closeBtnForm2.addEventListener('click', () => {
+    popUpNewWord.style.display = "none";
+  })
 
 
   function toogleVisibilityContainer () {
@@ -501,5 +514,142 @@ document.addEventListener('DOMContentLoaded', function () {
 
     miniPopUp.classList.remove('active');
   });
+
+  // Находим кнопку, на которую нужно кликнуть, чтобы показать попап
+  var showPopupButton = document.querySelector('.add-new-word');
+  
+  // Проверяем, существует ли кнопка
+  if (showPopupButton) {
+    // Добавляем обработчик клика на кнопку
+    showPopupButton.addEventListener('click', function () {
+      // Показываем форму, изменяя её стиль display на block
+      let addWordForm = document.querySelector('#add-word-form');
+
+      popUpNewWord.style.display = 'block';
+      addWordForm.style.display = 'flex';
+    });
+  }
+
+  closeBtnform3.addEventListener('click', () => {
+    window.location.reload();
+  })
+
+
+
+  let quizData = [];
+  let currentQuestionIndex = 0;
+  let correctAnswersCount = 0;
+
+
+
+  function generateQuizData() {
+    const storedWords = JSON.parse(localStorage.getItem('myWords') || '[]');
+  
+    if (storedWords.length < 10) {
+      displayMessage('Недостатньо слів у словнику для початку квізу. Потрібно мінімум 10 слів.', false);
+      return false;
+    }
+  
+    // Перемешиваем массив слов
+    const shuffledWords = shuffle(storedWords);
+    // Выбираем первые 10 слов после перемешивания
+    const selectedWords = shuffledWords.slice(0, 10);
+  
+    quizData = selectedWords.map(wordItem => {
+      const correctAnswer = wordItem.translation;
+      // Получаем неправильные ответы, исключая текущее слово
+      const wrongAnswers = shuffle(storedWords.filter(item => item.word !== wordItem.word).map(item => item.translation)).slice(0, 3);
+      const options = shuffle([...wrongAnswers, correctAnswer]); // Перемешиваем варианты ответов
+      return { question: wordItem.word, options, answer: correctAnswer };
+    });
+  
+    return true;
+  }
+  
+
+  function showQuestion() {
+    const questionObj = quizData[currentQuestionIndex];
+    quizContent.innerHTML = `<h3>${questionObj.question}</h3>` + 
+      questionObj.options.map(option => `<button class="button-primary" onclick="selectOption('${escapeHtml(option)}')">${escapeHtml(option)}</button>`).join('');
+    
+    // Обновляем прогресс-бар и текст
+    const progressPercent = ((currentQuestionIndex + 1) / quizData.length) * 100;
+    document.getElementById('progress').style.width = `${progressPercent}%`;
+    document.getElementById('progress-text').textContent = `${currentQuestionIndex + 1}/${quizData.length}`;
+  }
+
+  checkKnowledgeButton.addEventListener('click', () => {
+    quizPopup.style.display = "block";
+    wrapperKnowledge.style.display = "block";
+
+  })
+
+  window.selectOption = function(selectedOption) {
+    const buttons = document.querySelectorAll('.button-primary');
+    const questionObj = quizData[currentQuestionIndex];
+    const isCorrect = selectedOption === questionObj.answer;
+  
+    buttons.forEach(button => {
+      if (button.textContent === questionObj.answer) {
+        button.style.backgroundColor = 'lightgreen'; // Правильный ответ
+      } else if (button.textContent === selectedOption) {
+        button.style.backgroundColor = 'pink'; // Неправильный выбор
+      }
+      button.disabled = true; // Отключаем кнопку после выбора
+    });
+  
+    if (isCorrect) {
+      correctAnswersCount++;
+    }
+  
+    setTimeout(() => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < quizData.length) {
+        showQuestion();
+      } else {
+        displayFinalMessage(); // Показать итоговое сообщение
+      }
+    }, 1000); // Задержка перед показом следующего вопроса или результатов
+  };
+  
+
+  function displayMessage(message, isSuccess, className="") {
+    // Используем quizContent для отображения итогового сообщения
+    quizContent.innerHTML = `<div class="${className}" style="color: ${isSuccess ? 'green' : 'red'};">${message}</div>`;
+  }
+
+  function displayFinalMessage() {
+    displayMessage(`Квіз завершено! Правильних відповідей: ${correctAnswersCount} з ${quizData.length}`, true, "resultPopUP");
+  }
+
+  startQuizBtn.addEventListener('click', function() {    
+    if (generateQuizData()) {
+      wrapperKnowledge.style.display = "none"
+      showQuestion();
+    }
+  });
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // Функция для экранирования HTML символов в тексте
+  function escapeHtml(text) {
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+  }
+
+  setTimeout(function() {
+    const loader = document.getElementById('loader-wrapper');
+    loader.style.display = 'none';
+  }, 600); // Задержка скрытия лоадера на 0.5 секунды
 
 });
