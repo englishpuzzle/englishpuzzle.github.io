@@ -20,14 +20,17 @@
 </head>
 
 <body>
+  <div id="loader-wrapper">
+    <img id="loader" src="./img/logo.png" alt="Логотип">
+  </div>
+
   <div class="main-navigation">
     <div class="navigation-wrapper">
-      <!-- <button class="add-word-btn"><i class="fas fa-plus"></i> Додати слово</button> -->
-      <button  class="grid-item my-dictionary-btn" data-topic="Мої слова"> Мій словник</button>
-      <button class="all-themes-button"> База слів</button>
+      <button  class="grid-item my-dictionary-btn button-primary" data-topic="Мої слова"> Мій словник</button>
+      <button class="all-themes-button button-primary"> База слів</button>
     
-      <a class="navigation-item unavailable" href="#"><span>Додати нове слово</span><i class="fas fa-arrow-right"></i></a>
-      <a class="navigation-item unavailable" href="#"><span>Перевір знання</span><i class="fas fa-arrow-right"></i></a>
+      <a class="navigation-item add-new-word" href="#"><span>Додати нове слово</span><i class="fas fa-arrow-right"></i></a>
+      <a class="navigation-item check-knowledge" href="#"><span>Перевір знання</span><i class="fas fa-arrow-right"></i></a>
       <a class="navigation-item unavailable" href="#"><span>Мій прогрес</span><i class="fas fa-arrow-right"></i></a>
       <a class="navigation-item" href="https://send.monobank.ua/jar/5hBq1Corw6"><span>Підтримка проєкту</span><i class="fas fa-arrow-right"></i></a>
       <a class="navigation-item" href="https://t.me/+TcmuQxEsQhwwMjQy"><span>Підписатись на канал</span><i class="fas fa-arrow-right"></i></a>
@@ -70,11 +73,6 @@
       <h2 id="topic-title"></h2>
       <p class="amount-number"></p>
       <p class="additional-label"></p>
-      <div id="add-word-form" style="display: none;">
-        <input type="text" id="new-word" placeholder="Англійське слово">
-        <input type="text" id="new-translation" placeholder="Переклад">
-        <button id="add-word-btn">Додати</button>
-      </div>
       <div class="empty-vocabulary" style="display: none;">
         <p>Ваш словник не містить жодного слова! </p>
         <img src="./img/empty-vocabulary.png" alt="">
@@ -89,6 +87,42 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div id="popup-add-new-word" class="popup-add-new-word">
+    <div class="popup-content">
+      <h2 id="topic-title-add-word">Додати слово</h2>
+      <span class="close-button-form-2">×</span>
+      <div id="add-word-form" style="display: none;">
+        <input type="text" id="new-word" placeholder="Англійське слово">
+        <input type="text" id="new-translation" placeholder="Переклад">
+        <button id="add-word-btn">Додати</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz-popup" class="quiz-popup popup">
+    <div class="popup-content">
+      <span class="close-button-form-3">×</span>
+      <div class="wrapper-check-knowledge">
+        <h2 id="topic-title-check-knowledge">Перевірити знання</h2>
+        <p>У квіз входить <b> 10 випадкових слів</b> з вашого словника та пропонується 4 варіанти перекладу для кожного.</p>
+        <p>Ваше завдання — вибрати правильний переклад. Після кожної спроби ви побачите, чи була відповідь вірною. </p>
+        <p> На завершення, ви дізнаєтесь свій фінальний результат із загальною кількістю правильних відповідей.</p>
+        <div id="message-container" style="margin-top: 20px;"></div>
+        <button id="start-quiz-btn" class="button-primary">Почати</button>
+      </div>
+
+
+      <div id="quiz-content">
+
+      </div>
+    </div>
+
+    <div id="progress-bar">
+      <div id="progress" style="width: 0%;"></div>
+    </div>
+    <p id="progress-text" style="text-align: center;">0/10</p>
   </div>
 
   <script src="./assets/data-min.js"></script>
