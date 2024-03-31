@@ -218,9 +218,13 @@ document.addEventListener('DOMContentLoaded', function () {
       addWordForm.style.display = "none";
     }
 
+    console.log(topicWords)
+
     topicWords.forEach(({
       word,
-      translation
+      translation,
+      eng_example,
+      ukr_example
     }) => {
       const wordElement = document.createElement('div');
       wordElement.classList.add('word-item');
@@ -229,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function () {
       wordText.textContent = word;
 
       if (topic === "Мої слова") {
-        wordText.onclick = () => deleteOwnWord(word);
+        wordText.onclick = () => deleteOwnWord(word, eng_example, ukr_example);
       } else {
         wordText.onclick = function () {
           // Доступ к родительскому элементу .word-item
@@ -242,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
           const translationText = translationElement.textContent;
 
           // Теперь у вас есть доступ к тексту перевода и можно вызвать addWord
-          addWord(this.textContent, translationText);
+          addWord(this.textContent, translationText, eng_example, ukr_example);
 
           // Если нужно сделать что-то еще с translationElement или его текстом, код здесь
         };
@@ -252,6 +256,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const translationSpan = document.createElement('span');
       translationSpan.textContent = translation;
       translationSpan.classList.add('blur', 'translation');
+
+      translationSpan.setAttribute("data-eng-example", eng_example);
+      translationSpan.setAttribute("data-ukr-example", ukr_example);
 
       const buttonsWrapper = document.createElement('div');
       buttonsWrapper.classList.add('buttons-wrapper');
@@ -338,11 +345,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Всегда отображаем первую страницу
     addPageLink(paginationContainer, 1, '1', currentPage === 1);
 
-    // Добавляем многоточие если есть пропущенные страницы перед текущей страницей
-    if (currentPage > 3) {
-      paginationContainer.appendChild(document.createTextNode('... '));
-    }
-
     // Показываем предыдущую страницу, если это имеет смысл
     if (currentPage > 2) {
       addPageLink(paginationContainer, currentPage - 1, currentPage - 1, false);
@@ -356,11 +358,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Показываем следующую страницу, если это имеет смысл
     if (currentPage < pages - 1) {
       addPageLink(paginationContainer, currentPage + 1, currentPage + 1, false);
-    }
-
-    // Добавляем многоточие если есть пропущенные страницы после текущей страницы
-    if (currentPage < pages - 2) {
-      paginationContainer.appendChild(document.createTextNode('... '));
     }
 
     // Всегда отображаем последнюю страницу
@@ -432,14 +429,19 @@ document.addEventListener('DOMContentLoaded', function () {
     } // Если есть и скрытые, и показанные переводы, можно либо оставить текущий статус иконки, либо выбрать одно из состояний по умолчанию.
   }
 
-  function deleteOwnWord(word) {
+  function deleteOwnWord(word, eng_example="", ukr_example="") {
     // Находим и показываем попап удаления
     const miniPopup = document.getElementById('mini-popup');
     const deleteWordConfirmButton = document.getElementById('delete-word-confirm');
     const miniPopupTitle = miniPopup.querySelector('.mini-popup-content h2');
+    const exampleEnglish = miniPopup.querySelector('.mini-popup-content .example-eng');
+    const exampleUkrainian = miniPopup.querySelector('.mini-popup-content .example-ukr');
 
     // Заполняем тайтл выбранным словом
     miniPopupTitle.textContent = word;
+
+    exampleEnglish.textContent = eng_example;
+    exampleUkrainian.textContent = ukr_example;
 
     // Прикрепляем слово к кнопке удаления через data-атрибут
     deleteWordConfirmButton.setAttribute('data-word', word);
@@ -470,7 +472,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   }
 
-  function addWord(word, translation) {
+  function addWord(word, translation, eng_example="", ukr_example="") {
     // Получаем элемент для отображения сообщений валидации
     const additionalLabel = document.querySelector('.additional-label');
 
@@ -484,7 +486,9 @@ document.addEventListener('DOMContentLoaded', function () {
       // Добавляем новое слово в массив
       myWords.push({
         word,
-        translation
+        translation,
+        eng_example,
+        ukr_example
       });
 
       // Сохраняем обновлённый массив обратно в localStorage
@@ -500,8 +504,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     loadWordsFromLocalStorage();
-
-    // displayWordsForTopic("Мої слова", page = 1);
 
     setTimeout(() => {
       additionalLabel.textContent = '';
