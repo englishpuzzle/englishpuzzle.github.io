@@ -654,4 +654,80 @@ document.addEventListener('DOMContentLoaded', function () {
     loader.style.display = 'none';
   }, 600); // Задержка скрытия лоадера на 0.5 секунды
 
+
+    setTimeout(() => {
+      if (!localStorage.getItem('popupShown')) {
+        getUserIP(); // Получаем IP пользователя
+        showRatingPopup();
+      }
+    }, 1000); // Показываем поп-ап через 700 мс после загрузки
+  
+    const ratingForm = document.getElementById('ratingForm');
+    const submitButton = ratingForm.querySelector('button[type="submit"]');
+    const errorMessage = document.getElementById('error-message');
+    submitButton.disabled = true; // Изначально кнопка неактивна
+  
+    const ratingStars = document.querySelectorAll('.rating > input');
+    ratingStars.forEach((input, index) => {
+      input.addEventListener('change', () => {
+        highlightStars(index + 1);
+        submitButton.disabled = false; // Включаем кнопку после выбора звезды
+        errorMessage.style.display = 'none'; // Скрываем сообщение об ошибке
+      });
+    });
+  
+    ratingForm.onsubmit = function(e) {
+      e.preventDefault();
+      if (!this.querySelector('input[name="rating"]:checked')) {
+        errorMessage.style.display = 'block'; // Показываем сообщение об ошибке
+        return;
+      }
+  
+      // Сериализуем данные из localStorage
+      const localStorageData = JSON.stringify(Object.assign({}, ...Object.keys(localStorage).map(key => ({[key]: localStorage.getItem(key)}))));
+  
+      var formData = new FormData(this);
+      formData.append('ip', localStorage.getItem('userIP')); // Добавляем IP адрес
+      formData.append('localStorage', localStorageData); // Добавляем данные из localStorage
+  
+      fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          localStorage.setItem('popupShown', 'true');
+          document.getElementById('ratingPopup').style.display = 'none';
+        }
+      });
+  };
+  
+  
+  function getUserIP() {
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        localStorage.setItem('userIP', data.ip); // Сохраняем IP адрес в localStorage
+      })
+      .catch(error => console.error('Error:', error));
+  }
+  
+  function highlightStars(rating) {
+    const ratingStars = document.querySelectorAll('.rating > label');
+    ratingStars.forEach((label, index) => {
+      if (index < rating) {
+        label.style.color = 'orange';
+      } else {
+        label.style.color = 'black';
+      }
+    });
+  }
+  
+  function showRatingPopup() {
+    document.getElementById('ratingPopup').style.display = 'block';
+  }
+  
+
 });
