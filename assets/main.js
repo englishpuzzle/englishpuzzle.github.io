@@ -202,6 +202,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function displayWordsForTopic(topic, page = 1) {
+    let advise = document.querySelector('.advise-1');
     const itemsPerPage = 7; // Количество слов на странице
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -211,6 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     topicTitle.innerText = topic;
     wordsList.innerHTML = ""; // Очищаем предыдущий список слов
+    advise.setAttribute("data-topic", topic)
 
     if (topic === "Мої слова") {
       addWordForm.style.display = "flex";
@@ -655,12 +657,10 @@ document.addEventListener('DOMContentLoaded', function () {
   }, 600); // Задержка скрытия лоадера на 0.5 секунды
 
 
-    setTimeout(() => {
-      if (!localStorage.getItem('popupShown')) {
-        getUserIP(); // Получаем IP пользователя
-        showRatingPopup();
-      }
-    }, 1000); // Показываем поп-ап через 700 мс после загрузки
+    if (!localStorage.getItem('popupShown')) {
+      getUserIP(); // Получаем IP пользователя
+      showRatingPopup();
+    }
   
     const ratingForm = document.getElementById('ratingForm');
     const submitButton = ratingForm.querySelector('button[type="submit"]');
