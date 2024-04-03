@@ -548,7 +548,6 @@ h2 {
 .navigation-wrapper {
   display: flex;
   justify-content: left;
-  align-items: left;
   flex-direction: column;
   max-width: 400px;
 }
@@ -693,16 +692,10 @@ h2 {
 }
 
 #ratingPopup {
-  background-color: white;
-  border: 1px solid #ccc;
   padding: 10px;
   width: 300px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  z-index: 1000;
+  margin: 0 auto;
+  margin-top: 20px;
   border-radius: 10px;
 }
 
@@ -721,4 +714,82 @@ h2 {
   max-width: 40%;
   font-size: 14px;
   background: black;
+}
+
+.advise-1 {
+  background: #d6ebfa;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: black;
+  width: fit-content;
+}
+
+.advise-1  .my-words {
+  display: none;
+}
+
+.advise-1[data-topic="Мої слова"]  .my-words {
+  display: block;
+}
+
+.advise-1[data-topic="Мої слова"]  .global {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .popup-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .container {
+    max-width: 1200px;
+    transform: translate(-50%, 0);
+    left: 50%;
+  }
+
+  .grid-item:not(.my-dictionary-btn) {
+    width: 49%;
+  }
+
+  .grid {
+    justify-content: space-between;
+  }
+
+  #add-word-form {
+    flex-direction: column;
+  }
+
+  #add-word-btn {
+    max-width: 200px;
+  }
+
+  #add-word-form input[type="text"] {
+    max-width: 700px;
+    min-height: 50px;
+  }
+
+  #progress-bar {
+    max-width: 600px;
+  }
+
+  #start-quiz-btn {
+    max-width: 300px;
+  }
+
+  #quiz-popup {
+    max-width: 1200px;
+    transform: translate(-50%, 0);
+    left: 50%;
+  }
+
+  .word-item span:nth-child(2) {
+    font-size: 18px;
+  }
+
+  .word-item span:first-child {
+    font-size: 18px;
+  }
+
 }
