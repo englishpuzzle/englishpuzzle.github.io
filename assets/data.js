@@ -529,9 +529,7 @@ const topics = {
   {"word": "Empiricism", "translation": "Емпіризм", "eng_example": "Empiricism emphasizes the role of experience and evidence from the senses in the formation of ideas.", "ukr_example": "Емпіризм підкреслює роль досвіду та свідчень від почуттів у формуванні ідей."},
   {"word": "Humanism", "translation": "Гуманізм", "eng_example": "Humanism focuses on the value and agency of human beings, individually and collectively.", "ukr_example": "Гуманізм зосереджується на цінності та агентності людських істот, як індивідуально, так і колективно."},
   {"word": "Absurdism", "translation": "Абсурдизм", "eng_example": "Absurdism holds that the effort of humanity to find inherent meaning will ultimately fail because no such meaning exists.", "ukr_example": "Абсурдизм стверджує, що зусилля людства знайти внутрішній сенс в кінцевому підсумку проваляться, оскільки такого сенсу не існує."}
-]
-
-,
+],
 "Домашні тварини": 
 [
   {"word": "Dog", "translation": "Собака", "eng_example": "My dog loves to play fetch in the park.", "ukr_example": "Моя собака любить грати в апорт у парку."},
@@ -563,3 +561,21 @@ const topics = {
 ],
   "Мої слова": []
 };
+
+const activationCodes30Days = [
+  '8HGOS5', '1LFA57', 'L3FYFL', 'FSVF8J', 'ESO3LY', 
+  '89OZN9', 'WUMWIE', 'PXKRQX', 'EJ9SNR', '5NH2I1', 
+  '2PIOYG', 'YBZ316', 'QBPBPI', 'N7E821', '2G94B7'
+];
+
+const activationCodes60Days = [
+  '6M5IRJ', 'V3EZKE', '8OZXEJ', 'W7D9KW', 'A47MU0', 
+  '2ETDDH', 'W15PLT', 'IZUTRI', 'FOD7VI', '95L2GY', 
+  '3R7EJN', 'TS1TMZ', 'VI8BWW', 'E5SCN1', 'LRXT7A'
+];
+
+const activationCodes90Days = [
+  '2L3ZAC', '56SVKJ', '7KORCF', 'R4907F', 'EJ9MU5', 
+  'UGR5SL', 'FKETVT', '7HRXZ5', 'KIDUEK', 'NAUTIH', 
+  'LTHK13', 'LDHRNW', 'FG5MVS', 'Z4JLIS', 'KXOS1L'
+];
