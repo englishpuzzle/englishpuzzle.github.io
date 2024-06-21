@@ -730,4 +730,92 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   
 
+    checkActivationStatus();
+    const activateButton = document.getElementById('activate-button');
+    activateButton.addEventListener('click', activateCode);
+    updateSubscriptionDays();
+
+function checkActivationStatus() {
+    const expirationDate = localStorage.getItem('activationExpirationDate');
+    const usedCodes = JSON.parse(localStorage.getItem('usedActivationCodes')) || [];
+
+    if (expirationDate && new Date(expirationDate) > new Date()) {
+        document.querySelector('.popup-activation-overlay').style.display = 'none';
+    } else {
+        document.querySelector('.popup-activation-overlay').style.display = 'flex';
+    }
+}
+
+function activateCode() {
+    const inputCode = document.getElementById('popup-activation-code-input').value;
+    const errorElement = document.getElementById('popup-activation-error');
+
+    const allActivationCodes = [
+        ...activationCodes30Days,
+        ...activationCodes60Days,
+        ...activationCodes90Days,
+        'TEST3MIN' // Тестовый код для 3 минут
+    ];
+
+    const usedCodes = JSON.parse(localStorage.getItem('usedActivationCodes')) || [];
+
+    if (usedCodes.includes(inputCode)) {
+        errorElement.textContent = 'Цей код уже був використаний.';
+        errorElement.style.color = 'red';
+        return;
+    }
+
+    let activationDays;
+    if (activationCodes30Days.includes(inputCode)) {
+        activationDays = 30;
+    } else if (activationCodes60Days.includes(inputCode)) {
+        activationDays = 60;
+    } else if (activationCodes90Days.includes(inputCode)) {
+        activationDays = 90;
+    } else if (inputCode === 'TEST3MIN') {
+        activationDays = 0; // Используем минуты для тестирования
+    } else {
+        errorElement.textContent = 'Код введено некоректно.';
+        errorElement.style.color = 'red';
+        return;
+    }
+
+    let expirationDate = new Date();
+    if (activationDays === 0) {
+        expirationDate.setMinutes(expirationDate.getMinutes() + 3); // Добавляем 3 минуты
+    } else {
+        expirationDate.setDate(expirationDate.getDate() + activationDays);
+    }
+
+    localStorage.setItem('activationExpirationDate', expirationDate.toISOString());
+    usedCodes.push(inputCode);
+    localStorage.setItem('usedActivationCodes', JSON.stringify(usedCodes));
+
+    errorElement.textContent = `Акаунт активовано на ${activationDays === 0 ? 3 : activationDays} ${activationDays === 0 ? 'хвилин' : 'днів'}!`;
+    errorElement.style.color = 'green';
+
+    setTimeout(() => {
+        document.querySelector('.popup-activation-overlay').style.display = 'none';
+    }, 2000);
+
+    updateSubscriptionDays();
+}
+
+function updateSubscriptionDays() {
+  const expirationDate = localStorage.getItem('activationExpirationDate');
+  const subscriptionElement = document.querySelector('.navigation-item.subscription span');
+
+  if (expirationDate && new Date(expirationDate) > new Date()) {
+      const currentDate = new Date();
+      const expDate = new Date(expirationDate);
+      const remainingTime = expDate - currentDate;
+      const remainingDays = Math.ceil(remainingTime / (1000 * 60 * 60 * 24));
+
+      subscriptionElement.textContent = `Підписка дійсна ще: ${remainingDays} днів`;
+  } else {
+      subscriptionElement.textContent = 'Підписка неактивна';
+  }
+}
+
+
 });
