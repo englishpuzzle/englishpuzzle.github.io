@@ -24,6 +24,27 @@
     <img id="loader" src="./img/logo.png" alt="Логотип">
   </div>
 
+  <div class="popup-activation-overlay">
+    <div class="popup-activation-content">
+        <div class="popup-activation-header">На жаль, безкоштовний період закінчився</div>
+        <div class="popup-activation-text">Доступні плани:</div>
+        <div class="popup-activation-plans">
+            <p>30 днів - 149 грн</p>
+            <p>60 днів - 249 грн</p>
+            <p>90 днів - 349 грн</p>
+        </div>
+        <div class="popup-activation-buttons">
+            <a href="https://t.me/sunset_man" class="popup-activation-contact-button">Зв'язатися з менеджером</a>
+        </div>
+        <div class="popup-activation-code">
+            <label for="popup-activation-code-input">Ввести код активації</label>
+            <input type="text" id="popup-activation-code-input" placeholder="Введіть код активації">
+            <button id="activate-button">Активувати</button>
+            <div class="popup-activation-error" id="popup-activation-error"></div>
+        </div>
+    </div>
+</div>
+
   <div class="main-navigation">
     <div class="navigation-wrapper">
       <button  class="grid-item my-dictionary-btn button-primary" data-topic="Мої слова"> Мій словник</button>
@@ -35,6 +56,7 @@
       <a class="navigation-item" href="https://send.monobank.ua/jar/5hBq1Corw6"><span>Підтримка проєкту</span><i class="fas fa-arrow-right"></i></a>
       <a class="navigation-item" href="https://t.me/+TcmuQxEsQhwwMjQy"><span>Підписатись на канал</span><i class="fas fa-arrow-right"></i></a>
       <a class="navigation-item" href="https://t.me/sunset_man"><span>Виникли питання</span><i class="fas fa-arrow-right"></i></a>
+      <a class="navigation-item subscription" href="#"><span>Підписка дійна до: </span></a>
     </div>
   </div>
 
